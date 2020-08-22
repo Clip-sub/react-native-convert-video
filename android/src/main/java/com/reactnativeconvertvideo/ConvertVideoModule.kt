@@ -16,7 +16,7 @@ class ConvertVideoModule(reactContext: ReactApplicationContext) : ReactContextBa
     @ReactMethod
     fun convertToMp4(path: String, promise: Promise) {
 
-      promise.reject("Android not supported")
+      promise.resolve(path)
 
     }
 
