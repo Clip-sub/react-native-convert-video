@@ -6,6 +6,8 @@ This module converts iOS videos from .mov to .mp4
 
 ```sh
 yarn add https://github.com/maurocanuto/react-native-convert-video
+
+cd ios && pod install && cd ..
 ```
 
 
