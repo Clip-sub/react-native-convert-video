@@ -14,11 +14,11 @@ class ConvertVideoModule(reactContext: ReactApplicationContext) : ReactContextBa
     // Example method
     // See https://facebook.github.io/react-native/docs/native-modules-android
     @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-    
-      promise.resolve(a * b)
-    
+    fun convertToMp4(path: String, promise: Promise) {
+
+      promise.reject("Android not supported")
+
     }
 
-    
+
 }

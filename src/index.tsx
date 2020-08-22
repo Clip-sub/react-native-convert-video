@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
 
 type ConvertVideoType = {
-  multiply(a: number, b: number): Promise<number>;
+  convertToMp4(path: string): Promise<object>;
 };
 
 const { ConvertVideo } = NativeModules;

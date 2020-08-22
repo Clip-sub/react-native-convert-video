@@ -15,7 +15,13 @@ import ConvertVideo from "react-native-convert-video";
 
 // ...
 
-const result = await ConvertVideo.multiply(3, 7);
+const result = await ConvertVideo.convertToMp4(videoMovPath)
+```
+Response object:
+```json
+{
+  "path": "TEMP_VIDEO_PATH.mp4"
+}
 ```
 
 ## Contributing

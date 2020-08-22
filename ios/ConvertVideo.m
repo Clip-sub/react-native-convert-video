@@ -1,19 +1,64 @@
 #import "ConvertVideo.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVAsset.h>
 
 @implementation ConvertVideo
 
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
 RCT_EXPORT_MODULE()
 
-// Example method
-// See // https://facebook.github.io/react-native/docs/native-modules-ios
-RCT_REMAP_METHOD(multiply,
-                 multiplyWithA:(nonnull NSNumber*)a withB:(nonnull NSNumber*)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(convertToMp4:(NSString *)path resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 {
-  NSNumber *result = @([a floatValue] * [b floatValue]);
+    @try {
+        NSLog(@"Converting video %@", path);
+        path = [path stringByReplacingOccurrencesOfString:@"file://"
+                                                       withString:@""];
+        AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:path] options:nil];
+        NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
 
-  resolve(result);
+        if ([compatiblePresets containsObject:AVAssetExportPresetLowQuality])
+        {
+            AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset presetName:AVAssetExportPresetPassthrough];
+            // save to temp directory
+            NSString* tempDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
+                                                                           NSUserDomainMask,
+                                                                           YES) lastObject];
+            NSString *videoPath = [tempDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.mp4", [[NSProcessInfo processInfo] globallyUniqueString]]];
+
+            exportSession.outputURL = [NSURL fileURLWithPath:videoPath];
+            NSLog(@"videopath of your mp4 file = %@",videoPath);  // PATH OF YOUR .mp4 FILE
+            exportSession.outputFileType = AVFileTypeMPEG4;
+            exportSession.shouldOptimizeForNetworkUse = YES;
+
+            [exportSession exportAsynchronouslyWithCompletionHandler:^{
+
+                switch ([exportSession status]) {
+
+                    case AVAssetExportSessionStatusFailed:
+                        reject([[exportSession error] localizedDescription], nil, nil);
+                        break;
+
+                    case AVAssetExportSessionStatusCancelled:
+                        reject(@"Canceled", nil, nil);
+                        break;
+
+                    case AVAssetExportSessionStatusCompleted:
+                        resolve(@{ @"path": videoPath });
+                        break;
+
+                    default:
+                        break;
+                }
+            }];
+
+        }
+    } @catch(NSException *e) {
+        reject(e.reason, nil, nil);
+    }
 }
 
 @end

@@ -1,17 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import ConvertVideo from 'react-native-convert-video';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    ConvertVideo.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result</Text>
     </View>
   );
 }
