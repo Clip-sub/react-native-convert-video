@@ -6,7 +6,6 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 
 class ConvertVideoModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
-
     override fun getName(): String {
         return "ConvertVideo"
     }
@@ -15,10 +14,6 @@ class ConvertVideoModule(reactContext: ReactApplicationContext) : ReactContextBa
     // See https://facebook.github.io/react-native/docs/native-modules-android
     @ReactMethod
     fun convertToMp4(path: String, promise: Promise) {
-
       promise.resolve(path)
-
     }
-
-
 }
