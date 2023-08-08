@@ -1,7 +1,7 @@
 {
-  "name": "react-native-convert-video",
+  "name": "@clip-sub/react-native-convert-video",
   "version": "0.1.0",
-  "description": "This module converts iOS videos from .mov to .mp4",
+  "description": "Convert iOS videos from .mov to .mp4",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
@@ -42,25 +42,24 @@
   },
   "homepage": "https://github.com/maurocanuto/react-native-convert-video#readme",
   "devDependencies": {
-    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/config-conventional": "^17.6.7",
     "@react-native-community/bob": "^0.16.2",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@release-it/conventional-changelog": "^1.1.4",
-    "@types/jest": "^26.0.0",
-    "@types/react": "^16.9.19",
-    "@types/react-native": "0.62.13",
-    "commitlint": "^8.3.5",
-    "eslint": "^7.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "husky": "^4.2.5",
-    "jest": "^26.0.1",
-    "pod-install": "^0.1.0",
-    "prettier": "^2.0.5",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
-    "release-it": "^13.5.8",
-    "typescript": "^3.8.3"
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@release-it/conventional-changelog": "^7.0.0",
+    "@types/jest": "^29.5.3",
+    "@types/react": "^18.2.19",
+    "@types/react-native": "^0.71.0",
+    "commitlint": "^17.6.7",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "jest": "^29.6.2",
+    "pod-install": "^0.1.38",
+    "prettier": "^3.0.1",
+    "react": "^18.2.0",
+    "react-native": "^0.71.0",
+    "release-it": "^16.1.3",
+    "typescript": "^5.1.0"
   },
   "peerDependencies": {
     "react": "*",
@@ -72,12 +71,6 @@
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn typescript"
-    }
   },
   "commitlint": {
     "extends": [
